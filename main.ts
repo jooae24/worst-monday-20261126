@@ -4,7 +4,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ENTRY =
-  "My worst Monday: the deploy I shipped Friday came back, the inbox ate my weekend, and stand-up was just a calendar invite in disguise.";
+  "My worst Monday: the deploy I shipped Friday boomeranged, my inbox ate my weekend, and stand-up was just a calendar invite in disguise.";
 const MIN_CHARS = 1;
 const MAX_CHARS = 140;
 
@@ -19,6 +19,9 @@ function checkEntry(text: string): void {
   }
   if (text.includes("\n") || text.includes("\r")) {
     throw new Error("entry must be a single line");
+  }
+  if (text !== text.trim() || text.includes("  ")) {
+    throw new Error("entry must not have leading/trailing whitespace or double spaces");
   }
 }
 
